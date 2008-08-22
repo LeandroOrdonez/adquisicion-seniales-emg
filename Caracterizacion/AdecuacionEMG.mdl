@@ -1,12 +1,12 @@
 Model {
-  Name			  "AdecuacionEMG2"
+  Name			  "AdecuacionEMG3"
   Version		  6.6
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.24"
+    ComputedModelVersion    "1.28"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -44,8 +44,8 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "F565la07hrfjn"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Aug 17 10:46:13 2008"
-  ModelVersionFormat	  "1.%<AutoIncrement:24>"
+  LastModifiedDate	  "Sun Aug 17 11:04:11 2008"
+  ModelVersionFormat	  "1.%<AutoIncrement:28>"
   ConfigurationManager	  "None"
   SimulationMode	  "normal"
   LinearizationMsg	  "none"
@@ -489,23 +489,6 @@ Model {
   }
   BlockParameterDefaults {
     Block {
-      BlockType		      ActionPort
-      InitializeStates	      "held"
-      ActionType	      "unset"
-    }
-    Block {
-      BlockType		      Constant
-      Value		      "1"
-      VectorParams1D	      on
-      SamplingMode	      "Sample based"
-      OutDataTypeMode	      "Inherit from 'Constant value'"
-      OutDataType	      "sfix(16)"
-      ConRadixGroup	      "Use specified scaling"
-      OutScaling	      "2^0"
-      SampleTime	      "inf"
-      FramePeriod	      "inf"
-    }
-    Block {
       BlockType		      DataTypeConversion
       OutDataTypeMode	      "Inherit via back propagation"
       OutDataType	      "sfix(16)"
@@ -517,18 +500,16 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      Demux
+      Outputs		      "4"
+      DisplayOption	      "none"
+      BusSelectionMode	      off
+    }
+    Block {
       BlockType		      Display
       Format		      "short"
       Decimation	      "10"
       Floating		      off
-      SampleTime	      "-1"
-    }
-    Block {
-      BlockType		      If
-      NumInputs		      "1"
-      IfExpression	      "u1 > 0"
-      ShowElse		      on
-      ZeroCross		      on
       SampleTime	      "-1"
     }
     Block {
@@ -629,6 +610,9 @@ Model {
       MinMaxOverflowLogging   "UseLocalSettings"
     }
     Block {
+      BlockType		      Terminator
+    }
+    Block {
       BlockType		      ToWorkspace
       VariableName	      "simulink_output"
       MaxDataPoints	      "1000"
@@ -656,7 +640,7 @@ Model {
     FontAngle		    "normal"
   }
   System {
-    Name		    "AdecuacionEMG2"
+    Name		    "AdecuacionEMG3"
     Location		    [2, 72, 1278, 749]
     Open		    on
     ModelBrowserVisibility  off
@@ -671,22 +655,6 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    Block {
-      BlockType		      Constant
-      Name		      "Constant"
-      Position		      [805, 175, 835, 205]
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "Constant1"
-      Position		      [740, 446, 780, 484]
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "Constant2"
-      Position		      [810, 290, 840, 320]
-      Value		      "0"
-    }
     Block {
       BlockType		      Reference
       Name		      "Digital\nFilter Design"
@@ -729,7 +697,7 @@ Model {
       BlockType		      Display
       Name		      "Display"
       Ports		      [1]
-      Position		      [1045, 185, 1135, 215]
+      Position		      [895, 30, 985, 60]
       Decimation	      "1"
       Lockdown		      off
     }
@@ -737,9 +705,165 @@ Model {
       BlockType		      Display
       Name		      "Display1"
       Ports		      [1]
-      Position		      [1055, 440, 1145, 470]
+      Position		      [890, 80, 980, 110]
       Decimation	      "1"
       Lockdown		      off
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display2"
+      Ports		      [1]
+      Position		      [895, 145, 985, 175]
+      Decimation	      "1"
+      Lockdown		      off
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Embedded\nMATLAB Function"
+      Ports		      [1, 3]
+      Position		      [660, 71, 730, 119]
+      MinAlgLoopOccurrences   off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Array {
+	Type			"Handle"
+	Dimension		0
+	PropName		"AvailSigsLoadSave"
+      }
+      MaskHideContents	      off
+      MaskType		      "Stateflow"
+      MaskDescription	      "Embedded MATLAB block"
+      MaskDisplay	      "disp('fcn');"
+      MaskSelfModifiable      on
+      MaskIconFrame	      on
+      MaskIconOpaque	      off
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Embedded\nMATLAB Function"
+	Location		[257, 457, 812, 717]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "u"
+	  Position		  [20, 101, 40, 119]
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  " Demux "
+	  Ports			  [1, 1]
+	  Position		  [270, 210, 320, 250]
+	  Outputs		  "1"
+	}
+	Block {
+	  BlockType		  "S-Function"
+	  Name			  " SFunction "
+	  Tag			  "Stateflow S-Function AdecuacionEMG3 2"
+	  Ports			  [1, 4]
+	  Position		  [180, 102, 230, 203]
+	  FunctionName		  "sf_sfun"
+	  PortCounts		  "[1 4]"
+	  Port {
+	    PortNumber		    2
+	    Name		    "extension"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    3
+	    Name		    "flexion"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    4
+	    Name		    "no_mov"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  " Terminator "
+	  Position		  [460, 221, 480, 239]
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "extension"
+	  Position		  [460, 101, 480, 119]
+	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "flexion"
+	  Position		  [460, 136, 480, 154]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "no_mov"
+	  Position		  [460, 171, 480, 189]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  SrcBlock		  " SFunction "
+	  SrcPort		  1
+	  Points		  [0, 115]
+	  DstBlock		  " Demux "
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  " Demux "
+	  SrcPort		  1
+	  DstBlock		  " Terminator "
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "u"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "extension"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  2
+	  DstBlock		  "extension"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "flexion"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  3
+	  DstBlock		  "flexion"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "no_mov"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  4
+	  DstBlock		  "no_mov"
+	  DstPort		  1
+	}
+      }
     }
     Block {
       BlockType		      Reference
@@ -757,192 +881,6 @@ Model {
       useDefaultDevice	      on
       userDeviceID	      "Micrófono (Conexant High Defini"
       dType		      "double"
-    }
-    Block {
-      BlockType		      If
-      Name		      "If"
-      Ports		      [1, 3]
-      Position		      [665, 76, 765, 114]
-      IfExpression	      "u1 > 0.4"
-      ElseIfExpressions	      "u1>0.2"
-      ZeroCross		      off
-    }
-    Block {
-      BlockType		      SubSystem
-      Name		      "If Action\nSubsystem"
-      Ports		      [1, 1, 0, 0, 0, 0, 0, 1]
-      Position		      [875, 172, 945, 208]
-      TreatAsAtomicUnit	      on
-      MinAlgLoopOccurrences   off
-      RTWSystemCode	      "Auto"
-      FunctionWithSeparateData off
-      MaskHideContents	      off
-      System {
-	Name			"If Action\nSubsystem"
-	Location		[342, 471, 840, 771]
-	Open			off
-	ModelBrowserVisibility	off
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"usletter"
-	PaperUnits		"inches"
-	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	Block {
-	  BlockType		  Inport
-	  Name			  "In1"
-	  Position		  [75, 78, 105, 92]
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  ActionPort
-	  Name			  "Action Port"
-	  Position		  [170, 15, 229, 43]
-	  InitializeStates	  "reset"
-	  ActionType		  "then"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "Out1"
-	  Position		  [325, 78, 355, 92]
-	  IconDisplay		  "Port number"
-	  BusOutputAsStruct	  off
-	}
-	Line {
-	  SrcBlock		  "In1"
-	  SrcPort		  1
-	  DstBlock		  "Out1"
-	  DstPort		  1
-	}
-      }
-    }
-    Block {
-      BlockType		      SubSystem
-      Name		      "If Action\nSubsystem1"
-      Ports		      [1, 1, 0, 0, 0, 0, 0, 1]
-      Position		      [840, 447, 910, 483]
-      TreatAsAtomicUnit	      on
-      MinAlgLoopOccurrences   off
-      RTWSystemCode	      "Auto"
-      FunctionWithSeparateData off
-      MaskHideContents	      off
-      System {
-	Name			"If Action\nSubsystem1"
-	Location		[340, 439, 842, 792]
-	Open			off
-	ModelBrowserVisibility	off
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"usletter"
-	PaperUnits		"inches"
-	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	Block {
-	  BlockType		  Inport
-	  Name			  "In1"
-	  Position		  [75, 78, 105, 92]
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  ActionPort
-	  Name			  "Action Port"
-	  Position		  [170, 15, 229, 43]
-	  InitializeStates	  "reset"
-	  ActionType		  "elseif"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "Out1"
-	  Position		  [325, 78, 355, 92]
-	  IconDisplay		  "Port number"
-	  BusOutputAsStruct	  off
-	}
-	Line {
-	  SrcBlock		  "In1"
-	  SrcPort		  1
-	  DstBlock		  "Out1"
-	  DstPort		  1
-	}
-      }
-    }
-    Block {
-      BlockType		      SubSystem
-      Name		      "If Action\nSubsystem2"
-      Ports		      [1, 1, 0, 0, 0, 0, 0, 1]
-      Position		      [890, 292, 960, 328]
-      TreatAsAtomicUnit	      on
-      MinAlgLoopOccurrences   off
-      RTWSystemCode	      "Auto"
-      FunctionWithSeparateData off
-      MaskHideContents	      off
-      System {
-	Name			"If Action\nSubsystem2"
-	Location		[342, 471, 840, 771]
-	Open			off
-	ModelBrowserVisibility	off
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"usletter"
-	PaperUnits		"inches"
-	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	Block {
-	  BlockType		  Inport
-	  Name			  "In1"
-	  Position		  [75, 78, 105, 92]
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  ActionPort
-	  Name			  "Action Port"
-	  Position		  [170, 15, 229, 43]
-	  InitializeStates	  "reset"
-	  ActionType		  "else"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "Out1"
-	  Position		  [325, 78, 355, 92]
-	  IconDisplay		  "Port number"
-	  BusOutputAsStruct	  off
-	}
-	Line {
-	  SrcBlock		  "In1"
-	  SrcPort		  1
-	  DstBlock		  "Out1"
-	  DstPort		  1
-	}
-      }
-    }
-    Block {
-      BlockType		      Mux
-      Name		      "Mux"
-      Ports		      [2, 1]
-      Position		      [1005, 181, 1010, 219]
-      ShowName		      off
-      Inputs		      "2"
-      DisplayOption	      "bar"
-    }
-    Block {
-      BlockType		      Mux
-      Name		      "Mux1"
-      Ports		      [2, 1]
-      Position		      [1010, 436, 1015, 474]
-      ShowName		      off
-      Inputs		      "2"
-      DisplayOption	      "bar"
     }
     Block {
       BlockType		      Reference
@@ -1059,7 +997,7 @@ Model {
       BlockType		      Reference
       Name		      "Unbuffer"
       Ports		      [1, 1]
-      Position		      [570, 71, 620, 119]
+      Position		      [520, 71, 570, 119]
       SourceBlock	      "dspbuff3/Unbuffer"
       SourceType	      "Unbuffer"
       ic		      "0"
@@ -1158,86 +1096,27 @@ Model {
     Line {
       SrcBlock		      "Unbuffer"
       SrcPort		      1
-      DstBlock		      "If"
+      DstBlock		      "Embedded\nMATLAB Function"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "If"
+      SrcBlock		      "Embedded\nMATLAB Function"
       SrcPort		      1
-      Points		      [140, 0]
-      DstBlock		      "If Action\nSubsystem"
-      DstPort		      ifaction
-    }
-    Line {
-      SrcBlock		      "Constant"
-      SrcPort		      1
-      DstBlock		      "If Action\nSubsystem"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "If"
-      SrcPort		      2
-      Points		      [25, 0; 0, 270; 80, 0]
-      DstBlock		      "If Action\nSubsystem1"
-      DstPort		      ifaction
-    }
-    Line {
-      SrcBlock		      "Constant1"
-      SrcPort		      1
-      DstBlock		      "If Action\nSubsystem1"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "If"
-      SrcPort		      3
-      Points		      [85, 0; 0, 172]
-      DstBlock		      "If Action\nSubsystem2"
-      DstPort		      ifaction
-    }
-    Line {
-      SrcBlock		      "Constant2"
-      SrcPort		      1
-      Points		      [15, 0; 0, 5]
-      DstBlock		      "If Action\nSubsystem2"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "If Action\nSubsystem"
-      SrcPort		      1
-      DstBlock		      "Mux"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Mux"
-      SrcPort		      1
+      Points		      [70, 0; 0, -35]
       DstBlock		      "Display"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "If Action\nSubsystem2"
-      SrcPort		      1
-      Points		      [10, 0]
-      Branch {
-	Points			[0, -100]
-	DstBlock		"Mux"
-	DstPort			2
-      }
-      Branch {
-	Points			[0, 135]
-	DstBlock		"Mux1"
-	DstPort			1
-      }
-    }
-    Line {
-      SrcBlock		      "If Action\nSubsystem1"
-      SrcPort		      1
-      DstBlock		      "Mux1"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "Mux1"
-      SrcPort		      1
+      SrcBlock		      "Embedded\nMATLAB Function"
+      SrcPort		      2
       DstBlock		      "Display1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Embedded\nMATLAB Function"
+      SrcPort		      3
+      Points		      [80, 0; 0, 50]
+      DstBlock		      "Display2"
       DstPort		      1
     }
   }
@@ -2194,15 +2073,210 @@ Stateflow {
 
 	machine {
 		id                   		1
-		name                 		"AdecuacionEMG2"
+		name                 		"AdecuacionEMG3"
 		created              		"17-Aug-2008 09:05:30"
 		isLibrary            		0
-		firstTarget          		2
+		firstTarget          		11
 		sfVersion            		66014000
 	}
 
+	chart {
+		id                                        		2
+		name                                      		"Embedded\n"
+					"MATLAB Function"
+		windowPosition                            		[281.813 354 200.25 189.75]
+		viewLimits                                		[0 156.75 0 153.75]
+		screen                                    		[1 1 1280 800 1.333333333333333]
+		treeNode                                  		[0 3 0 0]
+		firstTransition                           		5
+		firstJunction                             		4
+		viewObj                                   		2
+		machine                                   		1
+		subviewS {
+		}
+		decomposition                             		CLUSTER_CHART
+		type                                      		EML_CHART
+		firstData                                 		6
+		chartFileNumber                           		2
+		disableImplicitCasting                    		1
+		eml {
+			name       		"fcn"
+		}
+	}
+
+	state {
+		id                           		3
+		labelString                  		"eML_blk_kernel()"
+		position                     		[18 64.5 118 66]
+		fontSize                     		12
+		chart                        		2
+		treeNode                     		[2 0 0 0]
+		superState                   		SUBCHART
+		subviewer                    		2
+		type                         		FUNC_STATE
+		decomposition                		CLUSTER_STATE
+		eml {
+			isEML                    		1
+			script                   		"function [extension,flexion,no_mov] = fcn(u)\n"
+						"% This block supports an embeddable subset of the MATLAB la"
+						"nguage.\n"
+						"% See the help menu for details. \n"
+						"\n"
+						"flexion=0;\n"
+						"no_mov=0;\n"
+						"extension=0;\n"
+						"\n"
+						"if(u<0.2)\n"
+						"    flexion=0;\n"
+						"    no_mov=1;\n"
+						"    extension=0;\n"
+						"elseif(u>0.2&&u<0.4)\n"
+						"    flexion=1;\n"
+						"    no_mov=0;\n"
+						"    extension=0;\n"
+						"elseif(u>0.4)\n"
+						"    flexion=0;\n"
+						"    no_mov=0;\n"
+						"    extension=1;\n"
+						"end"
+			editorLayout             		"100 M4x1[131 89 671 621]"
+			treatIntsAsFixpt         		0
+		}
+	}
+
+	junction {
+		id         		4
+		position   		[23.5747 49.5747 7]
+		chart      		2
+		linkNode   		[2 0 0]
+		subviewer  		2
+		type       		CONNECTIVE_JUNCTION
+	}
+
+	transition {
+		id             		5
+		labelString    		"{eML_blk_kernel();}"
+		labelPosition  		[32.125 19.875 102.544 14.964]
+		fontSize       		12
+		src {
+			intersection		[0 0 1 0 23.5747 14.625 0 0]
+		}
+		dst {
+			id          		4
+			intersection		[7 0 -1 -1 23.5747 42.5747 0 0]
+		}
+		midPoint       		[23.5747 24.9468]
+		chart          		2
+		linkNode       		[2 0 0]
+		dataLimits     		[23.575 23.575 14.625 34.575]
+		subviewer      		2
+		drawStyle      		SMART
+		executionOrder 		1
+	}
+
+	data {
+		id                            		6
+		name                          		"u"
+		linkNode                      		[2 0 7]
+		scope                         		INPUT_DATA
+		machine                       		1
+		props {
+			array {
+				size      		"-1"
+			}
+			type {
+				method    		SF_INHERITED_TYPE
+			}
+			complexity           		SF_COMPLEX_INHERITED
+		}
+		dataType                      		"inherited"
+		fixptType {
+			slope   		1
+			baseType		SF_INT16_TYPE
+		}
+		complexity                    		SF_COMPLEX_INHERITED
+	}
+
+	data {
+		id                            		7
+		name                          		"extension"
+		linkNode                      		[2 6 8]
+		scope                         		OUTPUT_DATA
+		machine                       		1
+		props {
+			array {
+				size      		"-1"
+			}
+			type {
+				method    		SF_INHERITED_TYPE
+			}
+			complexity           		SF_COMPLEX_INHERITED
+			frame                		SF_FRAME_NO
+		}
+		dataType                      		"inherited"
+		fixptType {
+			slope   		1
+			baseType		SF_INT16_TYPE
+		}
+		complexity                    		SF_COMPLEX_INHERITED
+	}
+
+	data {
+		id                            		8
+		name                          		"flexion"
+		linkNode                      		[2 7 9]
+		scope                         		OUTPUT_DATA
+		machine                       		1
+		props {
+			array {
+				size      		"-1"
+			}
+			type {
+				method    		SF_INHERITED_TYPE
+				primitive 		SF_DOUBLE_TYPE
+				isSigned  		1
+				wordLength		"16"
+			}
+			complexity           		SF_COMPLEX_INHERITED
+			frame                		SF_FRAME_NO
+		}
+		dataType                      		"inherited"
+		complexity                    		SF_COMPLEX_INHERITED
+	}
+
+	data {
+		id                            		9
+		name                          		"no_mov"
+		linkNode                      		[2 8 0]
+		scope                         		OUTPUT_DATA
+		machine                       		1
+		props {
+			array {
+				size      		"-1"
+			}
+			type {
+				method    		SF_INHERITED_TYPE
+				primitive 		SF_DOUBLE_TYPE
+				isSigned  		1
+				wordLength		"16"
+			}
+			complexity           		SF_COMPLEX_INHERITED
+			frame                		SF_FRAME_NO
+		}
+		dataType                      		"inherited"
+		complexity                    		SF_COMPLEX_INHERITED
+	}
+
+	instance {
+		id     		10
+		name   		"Embedded\n"
+					"MATLAB Function"
+		machine		1
+		chart  		2
+	}
+
 	target {
-		id                        		2
+		id                        		11
 		name                      		"sfun"
 		description               		"Default Simulink S-Function Target."
 		machine                   		1
