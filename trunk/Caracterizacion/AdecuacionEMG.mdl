@@ -1,12 +1,12 @@
 Model {
-  Name			  "AdecuacionEMG3"
+  Name			  "AdecuacionEMG4"
   Version		  6.6
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.28"
+    ComputedModelVersion    "1.36"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -44,8 +44,8 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "F565la07hrfjn"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Aug 17 11:04:11 2008"
-  ModelVersionFormat	  "1.%<AutoIncrement:28>"
+  LastModifiedDate	  "Sun Aug 17 12:53:20 2008"
+  ModelVersionFormat	  "1.%<AutoIncrement:36>"
   ConfigurationManager	  "None"
   SimulationMode	  "normal"
   LinearizationMsg	  "none"
@@ -489,28 +489,10 @@ Model {
   }
   BlockParameterDefaults {
     Block {
-      BlockType		      DataTypeConversion
-      OutDataTypeMode	      "Inherit via back propagation"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
-      LockScale		      off
-      ConvertRealWorld	      "Real World Value (RWV)"
-      RndMeth		      "Zero"
-      SaturateOnIntegerOverflow	on
-      SampleTime	      "-1"
-    }
-    Block {
       BlockType		      Demux
       Outputs		      "4"
       DisplayOption	      "none"
       BusSelectionMode	      off
-    }
-    Block {
-      BlockType		      Display
-      Format		      "short"
-      Decimation	      "10"
-      Floating		      off
-      SampleTime	      "-1"
     }
     Block {
       BlockType		      Inport
@@ -542,9 +524,24 @@ Model {
       SaturateOnIntegerOverflow	on
     }
     Block {
-      BlockType		      "M-S-Function"
-      FunctionName	      "mlfile"
-      DisplayMFileStacktrace  on
+      BlockType		      SignalViewerScope
+      Floating		      off
+      ModelBased	      off
+      TickLabels	      "OneTimeTick"
+      ZoomMode		      "on"
+      Grid		      "on"
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitDataPoints	      on
+      MaxDataPoints	      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+      Disabled		      off
+      ScrollMode	      on
     }
     Block {
       BlockType		      Mux
@@ -571,18 +568,20 @@ Model {
       InitialOutput	      "[]"
     }
     Block {
-      BlockType		      Product
-      Inputs		      "2"
-      Multiplication	      "Element-wise(.*)"
-      CollapseMode	      "All dimensions"
-      CollapseDim	      "1"
-      InputSameDT	      on
-      OutDataTypeMode	      "Same as first input"
-      OutDataType	      "sfix(16)"
-      OutScaling	      "2^0"
-      LockScale		      off
-      RndMeth		      "Zero"
-      SaturateOnIntegerOverflow	on
+      BlockType		      Scope
+      ModelBased	      off
+      TickLabels	      "OneTimeTick"
+      ZoomMode		      "on"
+      Grid		      "on"
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitDataPoints	      on
+      MaxDataPoints	      "5000"
+      Decimation	      "1"
+      SampleInput	      off
       SampleTime	      "-1"
     }
     Block {
@@ -640,8 +639,8 @@ Model {
     FontAngle		    "normal"
   }
   System {
-    Name		    "AdecuacionEMG3"
-    Location		    [2, 72, 1278, 749]
+    Name		    "AdecuacionEMG4"
+    Location		    [2, 80, 1262, 757]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -657,9 +656,20 @@ Model {
     ReportName		    "simulink-default.rpt"
     Block {
       BlockType		      Reference
+      Name		      "Buffer"
+      Ports		      [1, 1]
+      Position		      [665, 290, 715, 340]
+      SourceBlock	      "dspbuff3/Buffer"
+      SourceType	      "Buffer"
+      N			      "128"
+      V			      "0"
+      ic		      "0"
+    }
+    Block {
+      BlockType		      Reference
       Name		      "Digital\nFilter Design"
       Ports		      [1, 1]
-      Position		      [240, 157, 305, 213]
+      Position		      [260, 67, 325, 123]
       UserDataPersistent      on
       UserData		      "DataTag0"
       SourceBlock	      "dsparch4/Digital\nFilter Design"
@@ -678,7 +688,7 @@ Model {
       BlockType		      Reference
       Name		      "Digital\nFilter Design1"
       Ports		      [1, 1]
-      Position		      [340, 157, 405, 213]
+      Position		      [360, 67, 425, 123]
       UserDataPersistent      on
       UserData		      "DataTag1"
       SourceBlock	      "dsparch4/Digital\nFilter Design"
@@ -694,34 +704,10 @@ Model {
       mwdsp_browser_bugfix_var off
     }
     Block {
-      BlockType		      Display
-      Name		      "Display"
-      Ports		      [1]
-      Position		      [895, 30, 985, 60]
-      Decimation	      "1"
-      Lockdown		      off
-    }
-    Block {
-      BlockType		      Display
-      Name		      "Display1"
-      Ports		      [1]
-      Position		      [890, 80, 980, 110]
-      Decimation	      "1"
-      Lockdown		      off
-    }
-    Block {
-      BlockType		      Display
-      Name		      "Display2"
-      Ports		      [1]
-      Position		      [895, 145, 985, 175]
-      Decimation	      "1"
-      Lockdown		      off
-    }
-    Block {
       BlockType		      SubSystem
       Name		      "Embedded\nMATLAB Function"
       Ports		      [1, 3]
-      Position		      [660, 71, 730, 119]
+      Position		      [850, 291, 920, 339]
       MinAlgLoopOccurrences   off
       RTWSystemCode	      "Auto"
       FunctionWithSeparateData off
@@ -770,7 +756,7 @@ Model {
 	Block {
 	  BlockType		  "S-Function"
 	  Name			  " SFunction "
-	  Tag			  "Stateflow S-Function AdecuacionEMG3 2"
+	  Tag			  "Stateflow S-Function AdecuacionEMG4 2"
 	  Ports			  [1, 4]
 	  Position		  [180, 102, 230, 203]
 	  FunctionName		  "sf_sfun"
@@ -812,6 +798,7 @@ Model {
 	  Position		  [460, 136, 480, 154]
 	  Port			  "2"
 	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
 	}
 	Block {
 	  BlockType		  Outport
@@ -819,6 +806,7 @@ Model {
 	  Position		  [460, 171, 480, 189]
 	  Port			  "3"
 	  IconDisplay		  "Port number"
+	  BusOutputAsStruct	  off
 	}
 	Line {
 	  SrcBlock		  " SFunction "
@@ -869,7 +857,7 @@ Model {
       BlockType		      Reference
       Name		      "From Wave\nDevice"
       Ports		      [0, 1]
-      Position		      [40, 159, 90, 211]
+      Position		      [60, 69, 110, 121]
       SourceBlock	      "dspwin32/From Wave\nDevice"
       SourceType	      "From Wave Device"
       SampleRate	      "44100"
@@ -884,9 +872,76 @@ Model {
     }
     Block {
       BlockType		      Reference
+      Name		      "Magnitude\nFFT"
+      Ports		      [1, 1]
+      Position		      [535, 289, 615, 341]
+      SourceBlock	      "dspspect3/Magnitude\nFFT"
+      SourceType	      "Magnitude FFT"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      mag_or_magsq	      "Magnitude squared"
+      fftLenInherit	      off
+      fftsize		      "256"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Maximum"
+      Ports		      [1, 1]
+      Position		      [760, 295, 815, 335]
+      DialogController	      "dspfixptddg.MinMax"
+      DialogControllerArgs    "DataTag2"
+      SourceBlock	      "dspstat3/Maximum"
+      SourceType	      "Maximum"
+      fcn		      "Value"
+      reset		      "None"
+      indexBase		      "One"
+      operateOver	      "Entire input"
+      colComp		      on
+      operation		      "maximum"
+      additionalParams	      off
+      allowOverrides	      on
+      accumMode		      "Same as product output"
+      accumWordLength	      "32"
+      accumFracLength	      "30"
+      prodOutputMode	      "Same as input"
+      prodOutputWordLength    "32"
+      prodOutputFracLength    "30"
+      roundingMode	      "Floor"
+      overflowMode	      off
+      LockScale		      off
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope1"
+      Ports		      [3]
+      Position		      [1040, 294, 1070, 326]
+      Floating		      off
+      Location		      [1, 45, 1281, 769]
+      Open		      on
+      NumInputPorts	      "3"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+	axes2			"%<SignalLabel>"
+	axes3			"%<SignalLabel>"
+      }
+      TimeRange		      "100"
+      YMin		      "-1.5~-1.5~-1.5"
+      YMax		      "1.5~1.5~1.5"
+      DataFormat	      "StructureWithTime"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Reference
       Name		      "Signal To\nWorkspace"
       Ports		      [1]
-      Position		      [525, 258, 580, 292]
+      Position		      [545, 168, 600, 202]
       SourceBlock	      "dspsnks4/Signal To\nWorkspace"
       SourceType	      "Signal To Workspace"
       ShowPortLabels	      "FromPortIcon"
@@ -907,7 +962,7 @@ Model {
       BlockType		      Reference
       Name		      "Signal To\nWorkspace1"
       Ports		      [1]
-      Position		      [190, 258, 245, 292]
+      Position		      [210, 168, 265, 202]
       SourceBlock	      "dspsnks4/Signal To\nWorkspace"
       SourceType	      "Signal To Workspace"
       ShowPortLabels	      "FromPortIcon"
@@ -926,63 +981,9 @@ Model {
     }
     Block {
       BlockType		      Reference
-      Name		      "Spectrum\nAF Scope"
-      Ports		      [1]
-      Position		      [535, 355, 570, 405]
-      DialogController	      "dspdialog.SpectrumScope"
-      DialogControllerArgs    "DataTag2"
-      SourceBlock	      "dspsnks4/Spectrum\nScope"
-      SourceType	      "Spectrum Scope"
-      ShowPortLabels	      "none"
-      SystemSampleTime	      "-1"
-      FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
-      ScopeProperties	      on
-      Domain		      "Frequency"
-      HorizSpan		      "1"
-      UseBuffer		      off
-      BufferSize	      "128"
-      Overlap		      "64"
-      inpFftLenInherit	      off
-      FFTlength		      "128"
-      numAvg		      "2"
-      DisplayProperties	      off
-      AxisGrid		      on
-      Memory		      off
-      FrameNumber	      on
-      AxisLegend	      off
-      AxisZoom		      off
-      OpenScopeAtSimStart     on
-      OpenScopeImmediately    off
-      FigPos		      "get(0,'defaultfigureposition')"
-      AxisProperties	      off
-      XUnits		      "Hertz"
-      XRange		      "[0...Fs/2]"
-      InheritXIncr	      on
-      XIncr		      "1.0"
-      XLabel		      "Samples"
-      XLimit		      "Auto"
-      YUnits		      "dB"
-      XMax		      "1"
-      XMin		      "0"
-      YMin		      "-30"
-      YMax		      "10"
-      YLabel		      "Magnitude-squared, dB"
-      LineProperties	      off
-      wintypeSpecScope	      "Hann"
-      RsSpecScope	      "50"
-      betaSpecScope	      "5"
-      winsampSpecScope	      "Periodic"
-    }
-    Block {
-      BlockType		      Reference
       Name		      "To Wave\nDevice"
       Ports		      [1]
-      Position		      [525, 159, 580, 211]
+      Position		      [550, 69, 605, 121]
       SourceBlock	      "dspwin32/To Wave\nDevice"
       SourceType	      "To Wave Device"
       bufDuration	      "2"
@@ -994,90 +995,30 @@ Model {
       enable24Bit	      off
     }
     Block {
-      BlockType		      Reference
-      Name		      "Unbuffer"
-      Ports		      [1, 1]
-      Position		      [520, 71, 570, 119]
-      SourceBlock	      "dspbuff3/Unbuffer"
-      SourceType	      "Unbuffer"
-      ic		      "0"
-    }
-    Block {
-      BlockType		      Reference
-      Name		      "Vector\nAF Scope"
-      Ports		      [1]
-      Position		      [535, 465, 570, 515]
-      DialogController	      "dspdialog.VectorScope"
-      DialogControllerArgs    "DataTag3"
-      SourceBlock	      "dspsnks4/Vector\nScope"
-      SourceType	      "Vector Scope"
-      ScopeProperties	      on
-      Domain		      "Time"
-      HorizSpan		      "1"
-      DisplayProperties	      off
-      AxisGrid		      on
-      Memory		      off
-      FrameNumber	      on
-      AxisLegend	      off
-      AxisZoom		      off
-      OpenScopeAtSimStart     on
-      OpenScopeImmediately    off
-      FigPos		      "get(0,'defaultfigureposition')"
-      AxisProperties	      off
-      XUnits		      "Hertz"
-      XRange		      "[0...Fs/2]"
-      InheritXIncr	      on
-      XIncr		      "1"
-      XLabel		      "Time"
-      XLimit		      "User-defined"
-      XMin		      "0"
-      XMax		      "10"
-      XStart		      "0"
-      YUnits		      "dB"
-      YMin		      "-1"
-      YMax		      "1"
-      YLabel		      "Amplitude"
-      LineProperties	      off
-      ShowPortLabels	      off
+      BlockType		      SignalViewerScope
+      Name		      "Scope"
+      Ports		      []
+      Position		      [35, 50, 75, 90]
+      IOType		      "viewer"
+      Location		      [930, 230, 1254, 469]
+      Open		      off
+      NumInputPorts	      "1"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      ShowDataMarkers	      off
+      ShowLegends	      off
+      DataFormat	      "Array"
+      MaxDataPoints	      "7500"
+      RefreshTime	      0.035000
+      Disabled		      off
     }
     Line {
       SrcBlock		      "Digital\nFilter Design"
       SrcPort		      1
       DstBlock		      "Digital\nFilter Design1"
       DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Digital\nFilter Design1"
-      SrcPort		      1
-      Points		      [50, 0]
-      Branch {
-	Points			[0, 90]
-	Branch {
-	  DstBlock		  "Signal To\nWorkspace"
-	  DstPort		  1
-	}
-	Branch {
-	  Points		  [0, 105]
-	  Branch {
-	    DstBlock		    "Spectrum\nAF Scope"
-	    DstPort		    1
-	  }
-	  Branch {
-	    Points		    [0, 110]
-	    DstBlock		    "Vector\nAF Scope"
-	    DstPort		    1
-	  }
-	}
-      }
-      Branch {
-	Points			[0, -90]
-	DstBlock		"Unbuffer"
-	DstPort			1
-      }
-      Branch {
-	DstBlock		"To Wave\nDevice"
-	DstPort			1
-      }
     }
     Line {
       SrcBlock		      "From Wave\nDevice"
@@ -1094,7 +1035,40 @@ Model {
       }
     }
     Line {
-      SrcBlock		      "Unbuffer"
+      SrcBlock		      "Digital\nFilter Design1"
+      SrcPort		      1
+      Points		      [50, 0]
+      Branch {
+	Points			[0, 90]
+	Branch {
+	  DstBlock		  "Signal To\nWorkspace"
+	  DstPort		  1
+	}
+	Branch {
+	  Points		  [0, 130]
+	  DstBlock		  "Magnitude\nFFT"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	DstBlock		"To Wave\nDevice"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Magnitude\nFFT"
+      SrcPort		      1
+      DstBlock		      "Buffer"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Buffer"
+      SrcPort		      1
+      DstBlock		      "Maximum"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Maximum"
       SrcPort		      1
       DstBlock		      "Embedded\nMATLAB Function"
       DstPort		      1
@@ -1102,36 +1076,31 @@ Model {
     Line {
       SrcBlock		      "Embedded\nMATLAB Function"
       SrcPort		      1
-      Points		      [70, 0; 0, -35]
-      DstBlock		      "Display"
+      DstBlock		      "Scope1"
       DstPort		      1
     }
     Line {
       SrcBlock		      "Embedded\nMATLAB Function"
       SrcPort		      2
-      DstBlock		      "Display1"
-      DstPort		      1
+      Points		      [15, 0; 0, -5]
+      DstBlock		      "Scope1"
+      DstPort		      2
     }
     Line {
       SrcBlock		      "Embedded\nMATLAB Function"
       SrcPort		      3
-      Points		      [80, 0; 0, 50]
-      DstBlock		      "Display2"
-      DstPort		      1
+      Points		      [15, 0; 0, -10]
+      DstBlock		      "Scope1"
+      DstPort		      3
     }
   }
 }
 MatData {
-  NumRecords		  4
-  DataRecord {
-    Tag			    DataTag3
-    Data		    "  %)30     .    ,     8    (    !          %    "
-"\"                0         0          "
-  }
+  NumRecords		  3
   DataRecord {
     Tag			    DataTag2
-    Data		    "  %)30     .    ,     8    (    !          %    "
-"\"                0         0          "
+    Data		    "  %)30     .    ,     8    (    !@         %    "
+"\"                0         )          "
   }
   DataRecord {
     Tag			    DataTag1
@@ -2073,7 +2042,7 @@ Stateflow {
 
 	machine {
 		id                   		1
-		name                 		"AdecuacionEMG3"
+		name                 		"AdecuacionEMG4"
 		created              		"17-Aug-2008 09:05:30"
 		isLibrary            		0
 		firstTarget          		11
@@ -2084,7 +2053,7 @@ Stateflow {
 		id                                        		2
 		name                                      		"Embedded\n"
 					"MATLAB Function"
-		windowPosition                            		[281.813 354 200.25 189.75]
+		windowPosition                            		[296.813 339 200.25 189.75]
 		viewLimits                                		[0 156.75 0 153.75]
 		screen                                    		[1 1 1280 800 1.333333333333333]
 		treeNode                                  		[0 3 0 0]
@@ -2092,8 +2061,6 @@ Stateflow {
 		firstJunction                             		4
 		viewObj                                   		2
 		machine                                   		1
-		subviewS {
-		}
 		decomposition                             		CLUSTER_CHART
 		type                                      		EML_CHART
 		firstData                                 		6
@@ -2126,20 +2093,20 @@ Stateflow {
 						"no_mov=0;\n"
 						"extension=0;\n"
 						"\n"
-						"if(u<0.2)\n"
+						"if(u<100)\n"
 						"    flexion=0;\n"
 						"    no_mov=1;\n"
 						"    extension=0;\n"
-						"elseif(u>0.2&&u<0.4)\n"
+						"elseif(u>100&&u<2000)\n"
 						"    flexion=1;\n"
 						"    no_mov=0;\n"
 						"    extension=0;\n"
-						"elseif(u>0.4)\n"
+						"elseif(u>2000)\n"
 						"    flexion=0;\n"
 						"    no_mov=0;\n"
 						"    extension=1;\n"
 						"end"
-			editorLayout             		"100 M4x1[131 89 671 621]"
+			editorLayout             		"100 M4x1[125 125 720 481]"
 			treatIntsAsFixpt         		0
 		}
 	}
